@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +8,7 @@ namespace Games.CollectGame.UI
     {
         [SerializeField] private RewardContainer rewardContainer;
         [SerializeField] private Image rewardProgressImage;
+        [SerializeField] private TMP_Text scoreText;
         [SerializeField] private GameObject scoreObject;
         
         
@@ -46,6 +48,8 @@ namespace Games.CollectGame.UI
             var isAchieveNextReward = reward.HasValue && reward == m_NextReward;
             var rewardProgress = isAchieveNextReward ? 1f : Mathf.InverseLerp(score, nextScore, value);
 
+            scoreText.text = $"Score: {value}";
+            
             m_NextReward = nextReward;
             SetRewardProgress(rewardProgress);
         }

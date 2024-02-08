@@ -13,18 +13,21 @@ MonoBehaviour:
   m_Name: Reward Container
   m_EditorClassIdentifier: 
   rewards:
-  - name: Islak burger
-    score: 3
-    isLast: 0
-  - name: "Cheddarl\u0131 Islak Burger"
-    score: 5
-    isLast: 0
-  - name: Atom Islak Burger
+  - name: "100 TL Hediye \xC7eki"
     score: 10
     isLast: 0
-  - name: "Atom Islak Burger + \u0130\xE7ecek"
-    score: 15
+  - name: "150 TL Hediye \xC7eki"
+    score: 20
     isLast: 0
-  - name: "2 adet Atom Islak Burger + \u0130\xE7ecek + Sos"
-    score: 25
+  - name: "250 TL Hediye \xC7eki"
+    score: 30
+    isLast: 0
+  - name: "350 TL Hediye \xC7eki"
+    score: 50
+    isLast: 0
+  - name: "500 TL Hediye \xC7eki"
+    score: 100
+    isLast: 0
+  - name: "1000 TL Hediye \xC7eki"
+    score: 200
     isLast: 1
