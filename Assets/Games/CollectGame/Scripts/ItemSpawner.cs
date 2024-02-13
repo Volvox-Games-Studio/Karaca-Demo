@@ -30,12 +30,19 @@ namespace Games.CollectGame
             m_MainCamera = Camera.main;
             GameTime.OnGameStoped += OnGameStopped;
             GameTime.OnGameContinue += OnGameContinue;
+            GameController.OnGameOver += OnGameOVer;
+        }
+
+        private void OnGameOVer(bool obj)
+        {
+            m_isGameStopped = true;
         }
 
         private void OnDestroy()
         {
             GameTime.OnGameStoped -= OnGameStopped;
             GameTime.OnGameContinue -= OnGameContinue;
+            GameController.OnGameOver -= OnGameOVer;
         }
 
         private void OnGameContinue()
@@ -82,9 +89,23 @@ namespace Games.CollectGame
             OnTargetCompleted?.Invoke(currentTarget);
             yield return new WaitForSeconds(3f);
             collectedTarget = 0;
-            currentTarget++;
-            m_iceRation += 2;
-            m_waitTimeBetweenItems -= 0.05f;
+
+            if (currentTarget == 5)
+            {
+                //GameTime.Stop();
+                
+                GameController.RaiseOnGameOver(true);
+                //currentTarget = 0;
+                //PHASE ATLANDI
+                yield break;
+            }
+            else
+            {
+                currentTarget++;    
+            }
+            
+            m_iceRation += 4;
+            m_waitTimeBetweenItems -= 0.1f;
             GameTime.Continue();
         }
 
@@ -97,18 +118,15 @@ namespace Games.CollectGame
                 return ice;
             }
 
-            if (currentTarget == 5)
-            {
-                var r2 = Random.Range(0, 2);
-                if (r2 == 0)
-                {
-                    return itemPrefabs[5];
-                }
+            var r2 = Random.Range(0, 2);
 
-                return itemPrefabs[0];
+            if (r2 == 0)
+            {
+                return itemPrefabs[currentTarget];
             }
-            
-            return itemPrefabs[Random.Range(currentTarget, currentTarget+1)];
+
+            return itemPrefabs[Random.Range(0, itemPrefabs.Length)];
+
         }
         
         private void SpawnItem(Item prefab)

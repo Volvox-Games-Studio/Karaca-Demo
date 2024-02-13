@@ -1,6 +1,7 @@
 using System;
 using Helpers;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Games.CollectGame
 {
@@ -63,6 +64,7 @@ namespace Games.CollectGame
         
         public void AddScore(int value)
         {
+            value = value * Random.Range(100, 125);
             var point = m_Score + value;
             SetScore(point);
         }

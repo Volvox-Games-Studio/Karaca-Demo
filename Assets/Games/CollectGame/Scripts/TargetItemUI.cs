@@ -11,6 +11,10 @@ namespace Games.CollectGame
         [SerializeField] private int _id;
         [SerializeField] private int _maxCollectCount;
         [SerializeField] private Transform _onCompleteMoveTransform;
+        [SerializeField] private GameObject _completedImages;
+        [SerializeField] private GameObject _passivedImages;
+        
+        
         
         
         private int _collectedCount;
@@ -31,6 +35,7 @@ namespace Games.CollectGame
 
             var startPos = transform.position;
             var startScale = transform.localScale;
+            ShowCompleted();
             transform.DOMove(_onCompleteMoveTransform.position, 1f).SetEase(Ease.OutCubic).OnComplete(() =>
             {
                 transform.DOMove(startPos, 1f);
@@ -66,6 +71,16 @@ namespace Games.CollectGame
             {
                 image.fillAmount = (float)_collectedCount / _maxCollectCount;
             }
+        }
+
+        private void ShowCompleted()
+        {
+            _completedImages.SetActive(true);
+        }
+
+        private void ShowInactive()
+        {
+            _passivedImages.SetActive(true);
         }
     }
 }

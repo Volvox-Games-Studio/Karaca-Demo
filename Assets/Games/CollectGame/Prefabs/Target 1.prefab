@@ -553,3 +553,6 @@ MonoBehaviour:
   - {fileID: 4797628107777898081}
   _id: 0
   _maxCollectCount: 10
+  _onCompleteMoveTransform: {fileID: 0}
+  _completedImages: {fileID: 4797628108056700068}
+  _passivedImages: {fileID: 3949782411935446333}

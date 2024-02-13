@@ -51,6 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collider: {fileID: 6317940738398027953}
   puffParticle: {fileID: 2837609728858217907, guid: 30538aa757d5768459b127b9b70d4362, type: 3}
+  starParticle: {fileID: 3432012103130926158, guid: 44fb5d01537cc324a9fd866a74b357fc, type: 3}
   _id: 2
 --- !u!54 &7707947093093249763
 Rigidbody:
