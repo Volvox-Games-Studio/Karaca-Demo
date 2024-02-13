@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Games.CollectGame
@@ -6,8 +7,10 @@ namespace Games.CollectGame
     {
         [SerializeField] private new Collider collider;
         [SerializeField] private GameObject puffParticle;
+        [SerializeField] private int _id;
 
-
+        public event Action<Item> OnCollideWithBasket;
+        public event Action<Item> OnItemDestroy;
         public Bounds GetBounds()
         {
             return collider.bounds;
@@ -20,6 +23,7 @@ namespace Games.CollectGame
 
         public void Collide(Basket basket)
         {
+            OnCollideWithBasket?.Invoke(this);
             DestroySelf();
         }
 
@@ -31,10 +35,16 @@ namespace Games.CollectGame
 
         private void DestroySelf()
         {
+            OnItemDestroy?.Invoke(this);
             var puff = Instantiate(puffParticle);
             puff.transform.position = transform.position;
             Destroy(puff, 2f);
             Destroy(gameObject);
+        }
+
+        public int GetId()
+        {
+            return _id;
         }
     }
 }

@@ -8,16 +8,21 @@ namespace Games.CollectGame
     public class ItemSpawner : MonoBehaviour
     {
         [SerializeField] private Item[] itemPrefabs;
+        [SerializeField] private Item ice;
+        [SerializeField] private int _targetCountForNext;
 
-
+        public static Action<int> OnTargetItemCollected;
+        
         private Camera m_MainCamera;
+        private int currentTarget = 0;
+        private int m_iceRation = 10;
 
-
+        
         private void Awake()
         {
             m_MainCamera = Camera.main;
         }
-
+        
         private IEnumerator Start()
         {
             while (true)
@@ -27,19 +32,57 @@ namespace Games.CollectGame
                 SpawnItem(prefab);
             }
         }
-
-
+        
         private Item GetRandomPrefab()
         {
-            return itemPrefabs[Random.Range(0, itemPrefabs.Length)];
+            var random = Random.Range(0, 100);
+
+            if (random < m_iceRation)
+            {
+                return ice;
+            }
+
+            if (currentTarget == 5)
+            {
+                var r2 = Random.Range(0, 2);
+                if (r2 == 0)
+                {
+                    return itemPrefabs[5];
+                }
+
+                return itemPrefabs[0];
+            }
+            
+            return itemPrefabs[Random.Range(currentTarget, currentTarget+2)];
         }
         
         private void SpawnItem(Item prefab)
         {
             var spawnPoint = GetSpawnPoint(prefab);
             var item = Instantiate(prefab, transform);
+
+            item.OnCollideWithBasket += OnItemCollideWithBasket;
+            item.OnItemDestroy += OnItemDestroy;
             
             item.SetPosition(spawnPoint);
+        }
+
+        private void OnItemDestroy(Item obj)
+        {
+            obj.OnCollideWithBasket -= OnItemCollideWithBasket;
+            obj.OnItemDestroy -= OnItemDestroy;
+        }
+
+        private void OnItemCollideWithBasket(Item item)
+        {
+            Debug.Log("ITEM COLLIDED " + item.GetId());
+            Debug.Log("CURRENT TARGET " + itemPrefabs[currentTarget].GetId());
+            
+            if (item.GetId() == itemPrefabs[currentTarget].GetId())
+            {
+                Debug.Log("INVOKELADIM");
+                OnTargetItemCollected?.Invoke(item.GetId());
+            }
         }
 
         private Vector3 GetSpawnPoint(Item prefab)

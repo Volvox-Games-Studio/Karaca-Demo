@@ -51,6 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collider: {fileID: 6317940738398027953}
   puffParticle: {fileID: 2837609728858217907, guid: 30538aa757d5768459b127b9b70d4362, type: 3}
+  _id: 1
 --- !u!54 &7707947093093249763
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -210,7 +211,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 3f719829361ee4d089c606ef6cda8629, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e36d9814c3bc0904689e1bfc4c721e11, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
