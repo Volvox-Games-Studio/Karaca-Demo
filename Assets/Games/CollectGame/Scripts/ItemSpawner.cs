@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using Cysharp.Threading.Tasks;
+using Helpers;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -9,30 +11,83 @@ namespace Games.CollectGame
     {
         [SerializeField] private Item[] itemPrefabs;
         [SerializeField] private Item ice;
-        [SerializeField] private int _targetCountForNext;
 
         public static Action<int> OnTargetItemCollected;
+        public static Action<int> OnTargetCompleted; 
+        
         
         private Camera m_MainCamera;
         private int currentTarget = 0;
+        private int collectedTarget;
         private int m_iceRation = 10;
+        private float m_waitTimeBetweenItems = 1.25f;
+        private bool m_isGameStopped;
 
-        
+        private Coroutine itemRoutine;
+
         private void Awake()
         {
             m_MainCamera = Camera.main;
+            GameTime.OnGameStoped += OnGameStopped;
+            GameTime.OnGameContinue += OnGameContinue;
         }
-        
-        private IEnumerator Start()
+
+        private void OnDestroy()
         {
-            while (true)
+            GameTime.OnGameStoped -= OnGameStopped;
+            GameTime.OnGameContinue -= OnGameContinue;
+        }
+
+        private void OnGameContinue()
+        {
+            m_isGameStopped = false;
+            itemRoutine = StartCoroutine(ItemRoutine());
+        }
+
+        private void OnGameStopped()
+        {
+            m_isGameStopped = true;
+            StopCoroutine(itemRoutine);
+        }
+
+        private void Start()
+        {
+            itemRoutine = StartCoroutine(ItemRoutine());
+        }
+
+        private IEnumerator ItemRoutine()
+        {
+            while (!m_isGameStopped)
             {
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(m_waitTimeBetweenItems);
                 var prefab = GetRandomPrefab();
                 SpawnItem(prefab);
             }
         }
-        
+
+        private void Update()
+        {
+            if (!m_isGameStopped)
+            {
+                if (collectedTarget >= 10)
+                {
+                    GameTime.Stop();
+                    StartCoroutine(OnTargetCountArrived());
+                }
+            }
+        }
+
+        private IEnumerator OnTargetCountArrived()
+        {
+            OnTargetCompleted?.Invoke(currentTarget);
+            yield return new WaitForSeconds(3f);
+            collectedTarget = 0;
+            currentTarget++;
+            m_iceRation += 2;
+            m_waitTimeBetweenItems -= 0.05f;
+            GameTime.Continue();
+        }
+
         private Item GetRandomPrefab()
         {
             var random = Random.Range(0, 100);
@@ -53,7 +108,7 @@ namespace Games.CollectGame
                 return itemPrefabs[0];
             }
             
-            return itemPrefabs[Random.Range(currentTarget, currentTarget+2)];
+            return itemPrefabs[Random.Range(currentTarget, currentTarget+1)];
         }
         
         private void SpawnItem(Item prefab)
@@ -82,6 +137,7 @@ namespace Games.CollectGame
             {
                 Debug.Log("INVOKELADIM");
                 OnTargetItemCollected?.Invoke(item.GetId());
+                collectedTarget++;
             }
         }
 

@@ -1,4 +1,5 @@
 using System;
+using Helpers;
 using UnityEngine;
 
 namespace Games.CollectGame
@@ -11,6 +12,22 @@ namespace Games.CollectGame
 
         public event Action<Item> OnCollideWithBasket;
         public event Action<Item> OnItemDestroy;
+
+        private void Start()
+        {
+            GameTime.OnGameStoped += OnGameStopped;
+        }
+
+        private void OnDestroy()
+        {
+            GameTime.OnGameStoped -= OnGameStopped;
+        }
+
+        private void OnGameStopped()
+        {
+            Destroy(gameObject);
+        }
+
         public Bounds GetBounds()
         {
             return collider.bounds;

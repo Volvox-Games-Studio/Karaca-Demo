@@ -16,6 +16,7 @@ namespace Games.CollectGame
         private int m_Score;
         private int m_Health;
         private float m_DeltaX;
+        private bool m_isGameStopped;
 
 
         public event Action<int> OnScoreChanged;
@@ -33,6 +34,24 @@ namespace Games.CollectGame
         {
             SetScore(0);
             SetHealth(1);
+            
+            GameTime.OnGameStoped += OnGameStoped;
+            GameTime.OnGameContinue += OnGameContinue;
+        }
+
+        private void OnGameContinue()
+        {
+            m_isGameStopped = false;
+        }
+
+        private void OnGameStoped()
+        {
+            m_isGameStopped = true;
+        }
+
+        private void OnDestroy()
+        {
+            
         }
 
         private void Update()
@@ -153,6 +172,8 @@ namespace Games.CollectGame
 
         private bool CanMove()
         {
+            if (m_isGameStopped) return false;
+
             if (GameTime.IsPaused()) return false;
             
             if (!Input.GetMouseButton(0)) return false;

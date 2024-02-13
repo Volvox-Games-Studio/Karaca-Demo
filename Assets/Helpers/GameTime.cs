@@ -11,8 +11,21 @@ namespace Helpers
 
         private static float ms_OldTimeScale = Time.timeScale;
         private static bool ms_IsPaused;
-        
-        
+
+        public static event Action OnGameStoped;
+        public static event Action OnGameContinue;
+
+
+
+        public static void Stop()
+        {
+            OnGameStoped?.Invoke();
+        }
+
+        public static void Continue()
+        {
+            OnGameContinue?.Invoke();
+        }
         public static void Pause()
         {
             ms_OldTimeScale = Time.timeScale;
