@@ -38,6 +38,12 @@ namespace Games.CollectGame
             
             GameTime.OnGameStoped += OnGameStoped;
             GameTime.OnGameContinue += OnGameContinue;
+            ItemSpawner.OnPhaseCompleted += OnPhaseCompleted;
+        }
+
+        private void OnPhaseCompleted()
+        {
+            transform.position = new Vector3(0, transform.position.y, transform.position.z);
         }
 
         private void OnGameContinue()
@@ -52,7 +58,9 @@ namespace Games.CollectGame
 
         private void OnDestroy()
         {
-            
+            GameTime.OnGameStoped -= OnGameStoped;
+            GameTime.OnGameContinue -= OnGameContinue;
+            ItemSpawner.OnPhaseCompleted -= OnPhaseCompleted;
         }
 
         private void Update()

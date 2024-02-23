@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,13 +10,13 @@ namespace Games.CollectGame
     public class TargetItemUI : MonoBehaviour
     {
         [SerializeField] private Image[] fillImages;
+        [SerializeField] private Sprite[] phaseTwoSprites;
+        [SerializeField] private Image myImage;
         [SerializeField] private int _id;
         [SerializeField] private int _maxCollectCount;
-        [SerializeField] private Transform _onCompleteMoveTransform;
         [SerializeField] private GameObject _completedImages;
         [SerializeField] private GameObject _passivedImages;
-        
-        
+        [SerializeField] private TMP_Text _collectedText;
         
         
         private int _collectedCount;
@@ -22,39 +24,43 @@ namespace Games.CollectGame
         
         private void Start()
         {
-            ItemSpawner.OnTargetItemCollected += OnTargetItemCollected;
-            ItemSpawner.OnTargetCompleted += OnTargetCompleted;
+            ItemSpawner.OnItemCollected += OnItemCollected;
+            ItemSpawner.OnPhaseCompleted += OnPhaseCompleted;
         }
 
-        private void OnTargetCompleted(int obj)
+        private void OnPhaseCompleted()
         {
-            if (obj != _id)
-            {
-                return;
-            }
+            StartCoroutine(InnerRoutine());
 
-            var startPos = transform.position;
-            var startScale = transform.localScale;
-            ShowCompleted();
-            transform.DOMove(_onCompleteMoveTransform.position, 1f).SetEase(Ease.OutCubic).OnComplete(() =>
+            IEnumerator InnerRoutine()
             {
-                transform.DOMove(startPos, 1f);
-                transform.DOScale(startScale, 1f);
-            });
-            transform.DOScale(Vector3.one * 2, 1f);
+                yield return new WaitForSeconds(2f);
+                
+                myImage.sprite = phaseTwoSprites[_id];
+                SetCollectedCount(0);
+                _id += 6;
+                HideCompleted();
+            }
         }
 
         private void OnDestroy()
         {
-            ItemSpawner.OnTargetItemCollected -= OnTargetItemCollected;
-            ItemSpawner.OnTargetCompleted -= OnTargetCompleted;
+            ItemSpawner.OnItemCollected -= OnItemCollected;
+            ItemSpawner.OnPhaseCompleted += OnPhaseCompleted;
         }
 
-        private void OnTargetItemCollected(int obj)
+        private void OnItemCollected(int obj)
         {
             if (obj == _id)
             {
                 SetCollectedCount(_collectedCount+1);
+                var count = _collectedCount;
+                if (count > 10)
+                {
+                    count = 10;
+                }
+
+                _collectedText.text = count + "/10";
             }
         }
 
@@ -63,6 +69,11 @@ namespace Games.CollectGame
             _collectedCount = count;
             
             DoFill();
+
+            if (_collectedCount == 10)
+            {
+                ShowCompleted();
+            }
         }
 
         private void DoFill()
@@ -78,9 +89,9 @@ namespace Games.CollectGame
             _completedImages.SetActive(true);
         }
 
-        private void ShowInactive()
+        private void HideCompleted()
         {
-            _passivedImages.SetActive(true);
+            _completedImages.SetActive(false);
         }
     }
 }
