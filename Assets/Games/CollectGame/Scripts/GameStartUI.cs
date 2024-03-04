@@ -9,7 +9,9 @@ namespace Games.CollectGame
     public class GameStartUI : MonoBehaviour
     {
         [SerializeField] private Button startButton;
-
+        [SerializeField] private GameObject hand;
+        
+            
         private void Awake()
         {
             GameTime.Stop();
@@ -23,6 +25,7 @@ namespace Games.CollectGame
             {
                 GameTime.Continue();
                 gameObject.SetActive(false);
+                hand.SetActive(true);
             });
         }
         

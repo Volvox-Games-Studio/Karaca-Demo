@@ -10,7 +10,9 @@ namespace Games.CollectGame
         [SerializeField] private GameObject puffParticle;
         [SerializeField] private GameObject starParticle;
         [SerializeField] private int _id;
-
+        [SerializeField] private GameObject iceCollectedSound;
+        
+        
         public static Action OnHitGround;
         public event Action<Item> OnCollideWithBasket;
         public event Action<Item> OnItemDestroy;
@@ -69,7 +71,15 @@ namespace Games.CollectGame
             OnItemDestroy?.Invoke(this);
             if (isBasket)
             {
-                CollectedParticle.ShowStatic();
+                if (_id == -1)
+                {
+                    var iceSound = Instantiate(iceCollectedSound);
+                    Destroy(iceSound,2f);
+                }
+                else
+                {
+                    CollectedParticle.ShowStatic();    
+                }
             }
             else
             {

@@ -85,6 +85,8 @@ namespace Games.CollectGame
         
         private IEnumerator ItemRoutine()
         {
+            yield return new WaitForSeconds(1f);
+            
             while (!m_isGameStopped)
             {
                 yield return new WaitForSeconds(m_waitTimeBetweenItems);
