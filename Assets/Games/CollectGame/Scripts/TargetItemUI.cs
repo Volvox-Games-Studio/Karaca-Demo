@@ -35,7 +35,8 @@ namespace Games.CollectGame
             IEnumerator InnerRoutine()
             {
                 yield return new WaitForSeconds(2f);
-                
+
+                _collectedText.text = "0/10";
                 myImage.sprite = phaseTwoSprites[_id];
                 SetCollectedCount(0);
                 _id += 6;

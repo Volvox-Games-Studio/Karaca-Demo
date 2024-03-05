@@ -22,7 +22,7 @@ public class Countdown : MonoBehaviour
     
             geriSayimText.text = "Başla!";
             yield return new WaitForSeconds(.75f);
-            Destroy(gameObject);
+            gameObject.SetActive(false);
 
             // Geri sayım tamamlandıktan sonra istediğiniz işlemi yapabilirsiniz
         }

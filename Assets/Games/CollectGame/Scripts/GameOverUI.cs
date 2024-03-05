@@ -26,11 +26,11 @@ namespace Games.CollectGame
             
             if (isWin)
             {
-                _text.text = "YOU WIN!";
+                _text.text = "KAZANDINIZ!";
             }
             else
             {
-                _text.text = "YOU LOST!";
+                _text.text = "KAYBETTİNİZ!";
             }
         }
     }
