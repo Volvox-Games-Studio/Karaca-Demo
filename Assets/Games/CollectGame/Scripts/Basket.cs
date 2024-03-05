@@ -124,6 +124,11 @@ namespace Games.CollectGame
         
         private void Move()
         {
+            if (PauseMenu.isPaused)
+            {
+                return;
+            }
+            
             m_DeltaX = 0f;
             
             if (!CanMove()) return;

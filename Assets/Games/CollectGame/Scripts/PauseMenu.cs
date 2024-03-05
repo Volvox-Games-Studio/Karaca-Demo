@@ -10,6 +10,8 @@ namespace Games.CollectGame
         [SerializeField] private Transform _mainTransform;
         [SerializeField] private Button _continueButton;
 
+        public static bool isPaused = false;
+        
         private float time = 0;
         
         private void Awake()
@@ -35,12 +37,16 @@ namespace Games.CollectGame
 
         private void Continue()
         {
+            isPaused = false;
+            
             _mainTransform.gameObject.SetActive(false);
             Time.timeScale = 1;
         }
 
         private void Stop()
         {
+            isPaused = true;
+            
             _mainTransform.gameObject.SetActive(true);
             Time.timeScale = 0;
         }
