@@ -12,7 +12,9 @@ namespace Games.CollectGame
         [SerializeField] private Item[] phaseOneItems;
         [SerializeField] private Item[] phaseTwoItems;
         [SerializeField] private Item ice;
-
+        [SerializeField] private Countdown cd;
+        
+        
         public static Action<int> OnItemCollected;
         public static Action OnPhaseCompleted;
 
@@ -85,7 +87,9 @@ namespace Games.CollectGame
         
         private IEnumerator ItemRoutine()
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(2f);
+            StartCoroutine(cd.GeriSayimiBaslat());
+            yield return new WaitForSeconds(3f);
             
             while (!m_isGameStopped)
             {
