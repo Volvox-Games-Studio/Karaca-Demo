@@ -16,6 +16,11 @@ namespace Games.CollectGame
             ItemSpawner.OnPhaseCompleted += PhaseCompleted;
         }
 
+        private void OnDestroy()
+        {
+            ItemSpawner.OnPhaseCompleted -= PhaseCompleted;
+        }
+
         private void PhaseCompleted()
         {
             foreach (var confetty in _confetties)
