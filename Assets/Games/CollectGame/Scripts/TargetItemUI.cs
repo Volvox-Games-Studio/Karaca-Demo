@@ -27,6 +27,7 @@ namespace Games.CollectGame
             ItemSpawner.OnItemCollected += OnItemCollected;
             ItemSpawner.OnPhaseCompleted += OnPhaseCompleted;
         }
+        
 
         private void OnPhaseCompleted()
         {
@@ -47,7 +48,7 @@ namespace Games.CollectGame
         private void OnDestroy()
         {
             ItemSpawner.OnItemCollected -= OnItemCollected;
-            ItemSpawner.OnPhaseCompleted += OnPhaseCompleted;
+            ItemSpawner.OnPhaseCompleted -= OnPhaseCompleted;
         }
 
         private void OnItemCollected(int obj)

@@ -16,6 +16,12 @@ namespace Games.CollectGame
             ItemSpawner.OnPhaseCompleted += PhaseCompleted;
         }
 
+        private void OnDestroy()
+        {
+            Item.OnHitGround -= OnItemHitGround;
+            ItemSpawner.OnPhaseCompleted -= PhaseCompleted;
+        }
+
         private void PhaseCompleted()
         {
             if (m_health ==3) return;
