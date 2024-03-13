@@ -12,7 +12,7 @@ namespace Games.CollectGame
    
 
     #if UNITY_WEBGL && !UNITY_EDITOR
-            [DllImport("Internal")]
+            [DllImport("__Internal")]
             private static extern int ReturnScore(int x);
     #endif
         
