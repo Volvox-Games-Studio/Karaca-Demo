@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Runtime.InteropServices;
 using Cysharp.Threading.Tasks;
 using Helpers;
 using UnityEngine;
@@ -38,9 +39,16 @@ namespace Games.CollectGame
             itemRoutine = StartCoroutine(ItemRoutine());
         }
         
+#if UNITY_WEBGL && !UNITY_EDITOR
+        [DllImport("Internal")]
+        private static extern void SendGameStart();
+#endif
         private void Start()
         {
-            //itemRoutine = StartCoroutine(ItemRoutine());
+        #if UNITY_WEBGL && !UNITY_EDITOR
+            SendGameStart();
+        #endif
+
         }
         
         private void OnDestroy()
