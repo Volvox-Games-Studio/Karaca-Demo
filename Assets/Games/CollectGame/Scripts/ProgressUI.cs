@@ -9,7 +9,7 @@ namespace Games.CollectGame
         [SerializeField] private RectTransform _progressObj;
         [SerializeField] private float maxValue;
         
-        private int[] itemCounts = new int[12];
+        private int[] itemCounts = new int[9];
         
         private void Start()
         {

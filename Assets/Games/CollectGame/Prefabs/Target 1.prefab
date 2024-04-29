@@ -805,12 +805,13 @@ MonoBehaviour:
   - {fileID: 4797628107047456530}
   - {fileID: 4797628107777898081}
   phaseTwoSprites:
+  - {fileID: 21300000, guid: 2c7c251ab7c8dbc4aad69268bf7b3fe9, type: 3}
+  - {fileID: 21300000, guid: ed9ab3a7f3f325e499ed7a01a4c0ab14, type: 3}
+  - {fileID: 21300000, guid: f628adedfa9fa1f448278e12068d3aaf, type: 3}
+  phaseThreeSprites:
   - {fileID: 21300000, guid: 212434799aca17c4585891d36796b356, type: 3}
   - {fileID: 21300000, guid: 7487aaa5d2024394fbcd0e19e8899ea7, type: 3}
   - {fileID: 21300000, guid: 99d3a5867df7bb144919dcb501249716, type: 3}
-  - {fileID: 21300000, guid: 7d9fe2d8099af3542b39d155649c2350, type: 3}
-  - {fileID: 21300000, guid: de8131156dcbb9f40a4a952f8493582b, type: 3}
-  - {fileID: 21300000, guid: 266fec724cee7ea4ea46dd35f17834d3, type: 3}
   myImage: {fileID: 4797628106853910247}
   _id: 0
   _maxCollectCount: 10

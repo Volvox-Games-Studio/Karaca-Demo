@@ -11,6 +11,7 @@ namespace Games.CollectGame
     {
         [SerializeField] private Image[] fillImages;
         [SerializeField] private Sprite[] phaseTwoSprites;
+        [SerializeField] private Sprite[] phaseThreeSprites;
         [SerializeField] private Image myImage;
         [SerializeField] private int _id;
         [SerializeField] private int _maxCollectCount;
@@ -40,7 +41,7 @@ namespace Games.CollectGame
                 _collectedText.text = "0/10";
                 myImage.sprite = phaseTwoSprites[_id];
                 SetCollectedCount(0);
-                _id += 6;
+                _id += 3;
                 HideCompleted();
             }
         }

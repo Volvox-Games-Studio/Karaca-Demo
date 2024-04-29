@@ -12,6 +12,7 @@ namespace Games.CollectGame
     {
         [SerializeField] private Item[] phaseOneItems;
         [SerializeField] private Item[] phaseTwoItems;
+        [SerializeField] private Item[] phaseThreeItems;
         [SerializeField] private Item ice;
         [SerializeField] private Countdown cd;
         
@@ -19,7 +20,7 @@ namespace Games.CollectGame
         public static Action<int> OnItemCollected;
         public static Action OnPhaseCompleted;
 
-        private int[] collectedItemCounts = new int[12];
+        private int[] collectedItemCounts = new int[9];
 
         
         private int currentPhase = 1;
@@ -62,13 +63,19 @@ namespace Games.CollectGame
         {
             if (!m_isGameStopped)
             {
-                if (currentPhase == 1 && collectedItemCounts[0] >= 10 && collectedItemCounts[1] >= 10 && collectedItemCounts[2] >= 10 && collectedItemCounts[3] >= 10 && collectedItemCounts[4] >= 10 && collectedItemCounts[5] >= 10)
+                if (currentPhase == 1 && collectedItemCounts[0] >= 10 && collectedItemCounts[1] >= 10 && collectedItemCounts[2] >= 10 )
                 {
                     currentPhase++;
                     GameTime.Stop();
                     StartCoroutine(OnTargetCountArrived());
                 }
-                else if (currentPhase == 2 && collectedItemCounts[6] >= 10 && collectedItemCounts[7] >= 10 && collectedItemCounts[8] >= 10 && collectedItemCounts[9] >= 10 && collectedItemCounts[10] >= 10 && collectedItemCounts[11] >= 10)
+                else if (currentPhase == 2 && collectedItemCounts[3] >= 10 && collectedItemCounts[4] >= 10 && collectedItemCounts[5] >= 10)
+                {
+                    currentPhase++;
+                    GameTime.Stop();
+                    StartCoroutine(OnTargetCountArrived());
+                }
+                else if (currentPhase == 3 && collectedItemCounts[6] >= 10 && collectedItemCounts[7] >= 10 && collectedItemCounts[8] >= 10 )
                 {
                     GameController.RaiseOnGameOver(true);
                     GameTime.Stop();
@@ -137,9 +144,21 @@ namespace Games.CollectGame
                 return phaseOneItems[randomNum];    
             }
             
+            if (currentPhase == 3)
+            {
+                var randomNum = Random.Range(0, phaseOneItems.Length);
+                
+                if (collectedItemCounts[randomNum+6] >= 10)
+                {
+                    return GetRandomPrefab();
+                }
+                
+                return phaseThreeItems[randomNum];    
+            }
+            
             var randomNum2 = Random.Range(0, phaseTwoItems.Length);
 
-            if (collectedItemCounts[randomNum2 +6] == 10)
+            if (collectedItemCounts[randomNum2 +3] == 10)
             {
                 return GetRandomPrefab();
             }
@@ -195,16 +214,6 @@ namespace Games.CollectGame
                 case 8:
                     collectedItemCounts[8]++;
                     break;
-                case 9:
-                    collectedItemCounts[9]++;
-                    break;
-                case 10:
-                    collectedItemCounts[10]++;
-                    break;
-                case 11:
-                    collectedItemCounts[11]++;
-                    break;
-                
                 default:
                     break;
             }
