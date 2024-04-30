@@ -19,7 +19,6 @@ namespace Games.CollectGame
         [SerializeField] private GameObject _passivedImages;
         [SerializeField] private TMP_Text _collectedText;
         
-        
         private int _collectedCount;
         
         
@@ -95,6 +94,18 @@ namespace Games.CollectGame
         private void HideCompleted()
         {
             _completedImages.SetActive(false);
+        }
+        
+        private void SetColectedCount(int count)
+        {
+            _collectedCount = count;
+            
+            DoFill();
+
+            if (_collectedCount == 10)
+            {
+                ShowCompleted();
+            }
         }
     }
 }
