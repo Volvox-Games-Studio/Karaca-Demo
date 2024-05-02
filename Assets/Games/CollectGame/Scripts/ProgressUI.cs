@@ -57,5 +57,10 @@ namespace Games.CollectGame
 
             return (float)total / 120;
         }
+
+        public float GetRatio()
+        {
+            return CalculateRatio(itemCounts);
+        }
     }
 }
