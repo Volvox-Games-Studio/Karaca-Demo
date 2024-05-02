@@ -18,6 +18,21 @@ namespace Games.CollectGame
             _openedImage.onClick.AddListener(ChangeSound);
             
             _closedImage.gameObject.SetActive(false);
+            
+            RestartButton.OnGameRestart+= GameOverUIOnOnGameRestart;
+        }
+
+        private void OnDestroy()
+        {
+            RestartButton.OnGameRestart += GameOverUIOnOnGameRestart;
+        }
+
+        private void GameOverUIOnOnGameRestart()
+        {
+            foreach (var audio in _audioManager)
+            {
+                audio.mute = false;
+            }
         }
 
         private void ChangeSound()

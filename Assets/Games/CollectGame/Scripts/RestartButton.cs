@@ -9,6 +9,8 @@ namespace Games.CollectGame
     {
         [SerializeField] private Button m_Button;
 
+        public static event Action OnGameRestart;
+        
         private void Start()
         {
             m_Button.onClick.AddListener(ReloadScene);
@@ -16,6 +18,7 @@ namespace Games.CollectGame
 
         private void ReloadScene()
         {
+            OnGameRestart?.Invoke();
             SceneManager.LoadScene(0);
         }
     }
