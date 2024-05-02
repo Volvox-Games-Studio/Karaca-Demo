@@ -6,7 +6,7 @@ namespace Games.CollectGame
 {
     public class SoundButton : MonoBehaviour
     {
-        [SerializeField] private GameObject _audioManager;
+        [SerializeField] private AudioSource[] _audioManager;
         [SerializeField] private Button _closedImage;
         [SerializeField] private Button _openedImage;
 
@@ -23,8 +23,19 @@ namespace Games.CollectGame
         private void ChangeSound()
         {
             isOpen = !isOpen;
+
+            foreach (var audio in _audioManager)
+            {
+                if (isOpen)
+                {
+                    audio.mute = false;
+                }
+                else
+                {
+                    audio.mute = true;
+                }
+            }
             
-            _audioManager.SetActive(isOpen);
             _closedImage.gameObject.SetActive(!isOpen);
             _openedImage.gameObject.SetActive(isOpen);
         }

@@ -4805,7 +4805,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ed9677cbecc478286b08f9d35894193, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _audioManager: {fileID: 1957609984}
+  _audioManager:
+  - {fileID: 1957609985}
+  - {fileID: 9122689392465693636, guid: 30538aa757d5768459b127b9b70d4362, type: 3}
+  - {fileID: 5244347674055773111, guid: 44fb5d01537cc324a9fd866a74b357fc, type: 3}
+  - {fileID: 4029871983928006081, guid: 17aac9b1a4baa334f92c63c50e65ec0f, type: 3}
   _closedImage: {fileID: 1231744981}
   _openedImage: {fileID: 180903115}
 --- !u!1 &1358620422
