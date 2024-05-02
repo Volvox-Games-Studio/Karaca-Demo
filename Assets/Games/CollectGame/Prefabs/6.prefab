@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -645079186829885867}
   - component: {fileID: 646004349661605640}
   m_Layer: 0
-  m_Name: Item 1
+  m_Name: 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,8 +30,8 @@ Transform:
   m_GameObject: {fileID: 4908972852520243930}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.15, y: 1.15, z: 1.15}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4992269769552942224}
   m_Father: {fileID: 0}
@@ -52,7 +52,7 @@ MonoBehaviour:
   collider: {fileID: 6317940738398027953}
   puffParticle: {fileID: 2837609728858217907, guid: 30538aa757d5768459b127b9b70d4362, type: 3}
   starParticle: {fileID: 3432012103130926158, guid: 44fb5d01537cc324a9fd866a74b357fc, type: 3}
-  _id: 1
+  _id: 5
   iceCollectedSound: {fileID: 8515927646884316279, guid: 17aac9b1a4baa334f92c63c50e65ec0f, type: 3}
 --- !u!54 &7707947093093249763
 Rigidbody:
@@ -81,8 +81,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.25
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.33129317
+  m_Center: {x: 0.0050258636, y: -0.27426678, z: 0}
 --- !u!114 &-645079186829885867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,8 +165,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8979622824854740867}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.002, y: 0.241, z: 0}
-  m_LocalScale: {x: 0.13, y: 0.13, z: 0.25999996}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.175, y: 0.175, z: 0.34999996}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 4992269769552942224}
@@ -218,7 +218,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 10, y: 10}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

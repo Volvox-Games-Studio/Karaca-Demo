@@ -3,6 +3,7 @@ using System.Collections;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 namespace Games.CollectGame
@@ -10,14 +11,13 @@ namespace Games.CollectGame
     public class TargetItemUI : MonoBehaviour
     {
         [SerializeField] private Image[] fillImages;
-        [SerializeField] private Sprite[] phaseTwoSprites;
-        [SerializeField] private Sprite[] phaseThreeSprites;
-        [SerializeField] private Image myImage;
         [SerializeField] private int _id;
         [SerializeField] private int _maxCollectCount;
         [SerializeField] private GameObject _completedImages;
-        [SerializeField] private GameObject _passivedImages;
+        [SerializeField] private GameObject _lockedImages;
         [SerializeField] private TMP_Text _collectedText;
+        [SerializeField] private int _myPhase;
+        
         
         private int _collectedCount;
         
@@ -28,41 +28,37 @@ namespace Games.CollectGame
             ItemSpawner.OnPhaseCompleted += OnPhaseCompleted;
         }
         
-
-        private void OnPhaseCompleted()
-        {
-            StartCoroutine(InnerRoutine());
-
-            IEnumerator InnerRoutine()
-            {
-                yield return new WaitForSeconds(2f);
-
-                _collectedText.text = "0/10";
-                myImage.sprite = phaseTwoSprites[_id];
-                SetCollectedCount(0);
-                _id += 3;
-                HideCompleted();
-            }
-        }
-
         private void OnDestroy()
         {
             ItemSpawner.OnItemCollected -= OnItemCollected;
             ItemSpawner.OnPhaseCompleted -= OnPhaseCompleted;
         }
 
+        private void OnPhaseCompleted(int phase)
+        {
+            if (phase + 1 == _myPhase)
+            {
+                CloseLockedImage();
+            }
+        }
+
+        private void CloseLockedImage()
+        {
+            _lockedImages.SetActive(false);
+        }
+        
         private void OnItemCollected(int obj)
         {
             if (obj == _id)
             {
                 SetCollectedCount(_collectedCount+1);
                 var count = _collectedCount;
-                if (count > 10)
+                if (count > 20)
                 {
-                    count = 10;
+                    count = 20;
                 }
 
-                _collectedText.text = count + "/10";
+                _collectedText.text = count + "/20";
             }
         }
 
@@ -72,7 +68,7 @@ namespace Games.CollectGame
             
             DoFill();
 
-            if (_collectedCount == 10)
+            if (_collectedCount == 20)
             {
                 ShowCompleted();
             }
@@ -102,7 +98,7 @@ namespace Games.CollectGame
             
             DoFill();
 
-            if (_collectedCount == 10)
+            if (_collectedCount == 20)
             {
                 ShowCompleted();
             }

@@ -22,7 +22,7 @@ namespace Games.CollectGame
             ItemSpawner.OnPhaseCompleted -= PhaseCompleted;
         }
 
-        private void PhaseCompleted()
+        private void PhaseCompleted(int phase)
         {
             if (m_health ==3) return;
 

@@ -41,7 +41,7 @@ namespace Games.CollectGame
             ItemSpawner.OnPhaseCompleted += OnPhaseCompleted;
         }
 
-        private void OnPhaseCompleted()
+        private void OnPhaseCompleted(int phase)
         {
             transform.position = new Vector3(0, transform.position.y, transform.position.z);
         }

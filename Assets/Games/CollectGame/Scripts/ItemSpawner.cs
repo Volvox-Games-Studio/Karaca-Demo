@@ -18,9 +18,9 @@ namespace Games.CollectGame
         
         
         public static Action<int> OnItemCollected;
-        public static Action OnPhaseCompleted;
+        public static Action<int> OnPhaseCompleted;
 
-        private int[] collectedItemCounts = new int[9];
+        private int[] collectedItemCounts = new int[6];
 
         
         private int currentPhase = 1;
@@ -63,19 +63,19 @@ namespace Games.CollectGame
         {
             if (!m_isGameStopped)
             {
-                if (currentPhase == 1 && collectedItemCounts[0] >= 10 && collectedItemCounts[1] >= 10 && collectedItemCounts[2] >= 10 )
+                if (currentPhase == 1 && collectedItemCounts[0] >= 20 && collectedItemCounts[1] >= 20 )
                 {
                     currentPhase++;
                     GameTime.Stop();
-                    StartCoroutine(OnTargetCountArrived());
+                    StartCoroutine(OnTargetCountArrived(1));
                 }
-                else if (currentPhase == 2 && collectedItemCounts[3] >= 10 && collectedItemCounts[4] >= 10 && collectedItemCounts[5] >= 10)
+                else if (currentPhase == 2 && collectedItemCounts[2] >= 20 && collectedItemCounts[3] >= 20 )
                 {
                     currentPhase++;
                     GameTime.Stop();
-                    StartCoroutine(OnTargetCountArrived());
+                    StartCoroutine(OnTargetCountArrived(2));
                 }
-                else if (currentPhase == 3 && collectedItemCounts[6] >= 10 && collectedItemCounts[7] >= 10 && collectedItemCounts[8] >= 10 )
+                else if (currentPhase == 3 && collectedItemCounts[4] >= 20 && collectedItemCounts[5] >= 20 )
                 {
                     GameController.RaiseOnGameOver(true);
                     GameTime.Stop();
@@ -114,9 +114,9 @@ namespace Games.CollectGame
             }
         }
 
-        private IEnumerator OnTargetCountArrived()
+        private IEnumerator OnTargetCountArrived(int phase)
         {
-            OnPhaseCompleted?.Invoke();
+            OnPhaseCompleted?.Invoke(phase);
             yield return new WaitForSeconds(3f);
             m_iceRation += 5;
             m_waitTimeBetweenItems -= .1f;
@@ -136,7 +136,7 @@ namespace Games.CollectGame
             {
                 var randomNum = Random.Range(0, phaseOneItems.Length);
                 
-                if (collectedItemCounts[randomNum] >= 10)
+                if (collectedItemCounts[randomNum] >= 20)
                 {
                     return GetRandomPrefab();
                 }
@@ -148,7 +148,7 @@ namespace Games.CollectGame
             {
                 var randomNum = Random.Range(0, phaseOneItems.Length);
                 
-                if (collectedItemCounts[randomNum+6] >= 10)
+                if (collectedItemCounts[randomNum+4] >= 20)
                 {
                     return GetRandomPrefab();
                 }
@@ -156,14 +156,19 @@ namespace Games.CollectGame
                 return phaseThreeItems[randomNum];    
             }
             
-            var randomNum2 = Random.Range(0, phaseTwoItems.Length);
-
-            if (collectedItemCounts[randomNum2 +3] == 10)
+            if (currentPhase == 2)
             {
-                return GetRandomPrefab();
+                var randomNum = Random.Range(0, phaseOneItems.Length);
+                
+                if (collectedItemCounts[randomNum+2] >= 20)
+                {
+                    return GetRandomPrefab();
+                }
+                
+                return phaseTwoItems[randomNum];    
             }
 
-            return phaseTwoItems[randomNum2];
+            return null;
         }
         
         private void SpawnItem(Item prefab)
@@ -204,15 +209,6 @@ namespace Games.CollectGame
                     break;
                 case 5:
                     collectedItemCounts[5]++;
-                    break;
-                case 6:
-                    collectedItemCounts[6]++;
-                    break;
-                case 7:
-                    collectedItemCounts[7]++;
-                    break;
-                case 8:
-                    collectedItemCounts[8]++;
                     break;
                 default:
                     break;

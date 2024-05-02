@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -645079186829885867}
   - component: {fileID: 646004349661605640}
   m_Layer: 0
-  m_Name: Item 2
+  m_Name: 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52,7 +52,7 @@ MonoBehaviour:
   collider: {fileID: 6317940738398027953}
   puffParticle: {fileID: 2837609728858217907, guid: 30538aa757d5768459b127b9b70d4362, type: 3}
   starParticle: {fileID: 3432012103130926158, guid: 44fb5d01537cc324a9fd866a74b357fc, type: 3}
-  _id: 2
+  _id: 3
   iceCollectedSound: {fileID: 8515927646884316279, guid: 17aac9b1a4baa334f92c63c50e65ec0f, type: 3}
 --- !u!54 &7707947093093249763
 Rigidbody:
@@ -165,7 +165,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8979622824854740867}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.034, y: 0.007, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.075, y: 0.075, z: 0.14999999}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -213,12 +213,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 625e701400f62f64594448073f5e4563, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1d903c2ae370e0c479539d7664e6cc87, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 10, y: 10}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
