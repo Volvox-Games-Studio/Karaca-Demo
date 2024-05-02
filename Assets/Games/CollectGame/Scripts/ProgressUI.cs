@@ -9,7 +9,7 @@ namespace Games.CollectGame
         [SerializeField] private RectTransform _progressObj;
         [SerializeField] private float maxValue;
         
-        private int[] itemCounts = new int[9];
+        private int[] itemCounts = new int[6];
         
         private void Start()
         {
@@ -25,9 +25,9 @@ namespace Games.CollectGame
         {
             for (var i = 0; i < itemSpawner.GetCollectedItemsCount().Length; i++)
             {
-                if (itemSpawner.GetCollectedItemsCount()[i] > 10)
+                if (itemSpawner.GetCollectedItemsCount()[i] > 20)
                 {
-                    itemCounts[i] = 10;
+                    itemCounts[i] = 20;
                 }
                 else
                 {

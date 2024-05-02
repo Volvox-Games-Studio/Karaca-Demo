@@ -4810,6 +4810,7 @@ MonoBehaviour:
   - {fileID: 9122689392465693636, guid: 30538aa757d5768459b127b9b70d4362, type: 3}
   - {fileID: 5244347674055773111, guid: 44fb5d01537cc324a9fd866a74b357fc, type: 3}
   - {fileID: 4029871983928006081, guid: 17aac9b1a4baa334f92c63c50e65ec0f, type: 3}
+  - {fileID: 8261688, guid: 12673f4cc7f725d4082ece9c7c724b9c, type: 3}
   _closedImage: {fileID: 1231744981}
   _openedImage: {fileID: 180903115}
 --- !u!1 &1358620422
