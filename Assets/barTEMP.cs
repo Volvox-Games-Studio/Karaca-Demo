@@ -13,6 +13,6 @@ public class barTEMP : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _myImage.fillAmount = _progressUI.GetRatio();
+        _myImage.fillAmount = _progressUI.GetRatio() + 0.01f;
     }
 }
