@@ -20,11 +20,16 @@ namespace Games.CollectGame
             _closedImage.gameObject.SetActive(false);
             
             RestartButton.OnGameRestart+= GameOverUIOnOnGameRestart;
+            
+            foreach (var audio in _audioManager)
+            {
+                audio.mute = false;
+            }
         }
 
         private void OnDestroy()
         {
-            RestartButton.OnGameRestart += GameOverUIOnOnGameRestart;
+            RestartButton.OnGameRestart -= GameOverUIOnOnGameRestart;
         }
 
         private void GameOverUIOnOnGameRestart()
