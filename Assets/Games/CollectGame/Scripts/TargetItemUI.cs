@@ -10,11 +10,9 @@ namespace Games.CollectGame
 {
     public class TargetItemUI : MonoBehaviour
     {
-        [SerializeField] private Image[] fillImages;
         [SerializeField] private int _id;
         [SerializeField] private int _maxCollectCount;
         [SerializeField] private GameObject _completedImages;
-        [SerializeField] private GameObject _lockedImages;
         [SerializeField] private TMP_Text _collectedText;
         [SerializeField] private int _myPhase;
         
@@ -38,13 +36,8 @@ namespace Games.CollectGame
         {
             if (phase + 1 == _myPhase)
             {
-                CloseLockedImage();
+                //CloseLockedImage();
             }
-        }
-
-        private void CloseLockedImage()
-        {
-            _lockedImages.SetActive(false);
         }
         
         private void OnItemCollected(int obj)
@@ -76,10 +69,7 @@ namespace Games.CollectGame
 
         private void DoFill()
         {
-            foreach (var image in fillImages)
-            {
-                image.fillAmount = (float)_collectedCount / _maxCollectCount;
-            }
+            
         }
 
         private void ShowCompleted()
