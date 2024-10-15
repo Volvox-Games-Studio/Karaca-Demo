@@ -119,10 +119,10 @@ TextureImporter:
       name: StartScreen
       rect:
         serializedVersion: 2
-        x: 23
-        y: 24
-        width: 1296
-        height: 2797
+        x: 20
+        y: 21
+        width: 1281
+        height: 2792
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,10 +140,10 @@ TextureImporter:
       name: Background
       rect:
         serializedVersion: 2
-        x: 1320
-        y: 19
-        width: 1296
-        height: 2797
+        x: 1325
+        y: 25
+        width: 1285
+        height: 2788
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
