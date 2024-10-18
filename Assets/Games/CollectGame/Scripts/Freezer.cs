@@ -5,6 +5,10 @@ namespace Games.CollectGame
 {
     public class Freezer : MonoBehaviour
     {
+        
+        
+        
+        
         public event Action OnFreeze;
         public event Action OnUnfreeze;
 
@@ -22,6 +26,7 @@ namespace Games.CollectGame
             if (!IsFrozen())
             {
                 OnUnfreeze?.Invoke();
+                
             }
         }
 
@@ -31,6 +36,7 @@ namespace Games.CollectGame
             if (!IsFrozen())
             {
                 OnFreeze?.Invoke();
+               
             }
             
             SetTimeLeft(duration);
