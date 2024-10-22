@@ -20,7 +20,7 @@ public class Countdown : MonoBehaviour
                 sayac--;
             }
     
-            geriSayimText.text = "Başla!";
+            geriSayimText.text = "Başla !";
             yield return new WaitForSeconds(.75f);
             gameObject.SetActive(false);
 

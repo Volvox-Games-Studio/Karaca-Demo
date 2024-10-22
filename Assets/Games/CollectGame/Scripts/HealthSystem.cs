@@ -40,28 +40,28 @@ namespace Games.CollectGame
         {
             if (healt == 2)
             {
-                healthImages[0].color = Color.white;
-                healthImages[1].color = Color.white;
-                healthImages[2].color = Color.black;
+                healthImages[2].gameObject.SetActive(true);
+                healthImages[2].gameObject.SetActive(true);
+                healthImages[2].gameObject.SetActive(false);
             }
             else if (healt == 1)
             {
-                healthImages[0].color = Color.white;
-                healthImages[1].color = Color.black;
-                healthImages[2].color = Color.black;
+                healthImages[2].gameObject.SetActive(true);
+                healthImages[2].gameObject.SetActive(false);
+                healthImages[2].gameObject.SetActive(false);
             }
             else if (healt == 0)
             {
-                healthImages[0].color = Color.black;
-                healthImages[1].color = Color.black;
-                healthImages[2].color = Color.black;
+                healthImages[2].gameObject.SetActive(false);
+                healthImages[2].gameObject.SetActive(false);
+                healthImages[2].gameObject.SetActive(false);
                 GameController.RaiseOnGameOver(false);
             }
             else if (healt ==3)
             {
-                healthImages[0].color = Color.white;
-                healthImages[1].color = Color.white;
-                healthImages[2].color = Color.white;
+                healthImages[2].gameObject.SetActive(false);
+                healthImages[2].gameObject.SetActive(false);
+                healthImages[2].gameObject.SetActive(false);
             }
         }
     }
